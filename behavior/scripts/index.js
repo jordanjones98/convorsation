@@ -22,6 +22,17 @@ exports.handle = (client) => {
     }
   })
 
+  const doingGood = client.createStep({
+      satisfied() {
+          return false
+      },
+
+      prompt() {
+          client.addTextResponse('That is good!')
+          clinet.done()
+      }
+  })
+
   const handleGreeting = client.createStep({
       satisfied() {
           return false
@@ -47,6 +58,7 @@ exports.handle = (client) => {
   client.runFlow({
     classifications: {
        greeting: 'greeting'
+
     },
     streams: {
       greeting: handleGreeting,
